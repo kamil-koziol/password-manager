@@ -1,0 +1,40 @@
+\section{Metody zabezpieczania sejfów}
+
+\subsection{Metody szyfrowania sejfu}
+
+Menedżery haseł zapewniają bezpieczne przechowywanie haseł i innych poufnych danych dzięki zastosowaniu zaawansowanych algorytmów szyfrowania z których najczęściej stosowane to:
+
+\begin{itemize}
+    \item Advanced Encryption Standard (AES) – jest to jeden z najbezpieczniejszych i najpopularniejszych algorytmów szyfrowania stosowanych przez menedżery haseł. AES działa na blokach danych o długości 128 bitów i wykorzystuje klucz szyfrowania o długości 128, 192 lub 256 bitów.
+    \item Blowfish – jest to szybki i skuteczny algorytm szyfrowania stosowany przez menedżery haseł. Blowfish działa na blokach danych o długości 64 bitów i wykorzystuje klucz szyfrowania o długości od 32 do 448 bitów.
+    \item Twofish – to inny popularny algorytm szyfrowania stosowany przez menedżery haseł. Twofish działa na blokach danych o długości 128 bitów i wykorzystuje klucz szyfrowania o długości 128, 192 lub 256 bitów.
+  \end{itemize}
+
+\subsection{AES}
+
+\subsection{Blowfish}
+
+\subsection{Twofish}
+\subsubsection{Historia}
+Twofish to algorytm szyfru blokowego z kluczem symetrycznym, który został zaprojektowany przez Bruce'a Schneiera, Johna Kelseya, Douga Whitinga, Davida Wagnera, Chrisa Halla i Nielsa Fergusona w 1998 roku. Jest to następca algorytmu szyfrowania Blowfish.
+\subsubsection{Dzialanie}
+Twofish działa na blokach danych o stałej długości (128 bitów) i używa tajnego klucza do szyfrowania i deszyfrowania danych. Długość klucza może wynosić od 128 do 256 bitów, co czyni go bardziej bezpiecznym niż Blowfish.
+
+Algorytm Twofish wykorzystuje strukturę sieci Feistela, która jest powszechnie stosowaną strukturą w szyfrach blokowych. Polega on na podzieleniu danych wejściowych na dwa równej wielkości bloki, a następnie zastosowaniu serii rund do bloków przy użyciu harmonogramu klucza.
+
+Podczas każdej rundy, nieliniowa funkcja substytucji (S-box) jest stosowana do każdego bloku, aby wprowadzić zamieszanie, a liniowa transformacja (macierz MDS) jest stosowana do każdego bloku, aby wprowadzić dyfuzję. Harmonogram klucza jest używany do generowania zestawu kluczy okrągłych z oryginalnego tajnego klucza, które są używane w każdej rundzie do modyfikacji danych wejściowych.
+
+Jedną z kluczowych mocnych stron Twofish jest jego zależne od klucza S-boxy, które sprawiają, że jest bardziej odporny na niektóre ataki, takie jak kryptoanaliza różnicowa. Ma również silny efekt lawinowy, co oznacza, że niewielka zmiana w danych wejściowych lub kluczu powoduje znaczącą zmianę w danych wyjściowych.
+
+Został on przyjęty przez kilka organizacji zajmujących się standardami bezpieczeństwa, w tym Narodowy Instytut Standardów i Technologii (NIST) oraz Międzynarodową Organizację Normalizacyjną (ISO). Szyfr Twofish nie zostal opatentowany. 
+
+
+Wszystkie powyższe algorytmy szyfrowania są uważane za bardzo bezpieczne i wykorzystywane przez wiele menedżerów haseł. Ponadto, menedżery haseł często stosują dodatkowe zabezpieczenia, takie jak hasła główne, dwuskładnikową autoryzację (np. TOTP, UbiKey) i szyfrowanie końcowe do ochrony danych użytkownika.
+
+\subsection{Metody hashowania haseł głównych}
+
+\begin{itemize}
+    \item PBKDF2 (Password-Based Key Derivation Function 2) – jest to algorytm hashowania, który wykorzystuje iteracyjny proces szyfrowania w celu zwiększenia bezpieczeństwa hasła głównego. PBKDF2 wykorzystuje funkcję skrótu, która generuje wartość hasha na podstawie hasła użytkownika, a następnie przeprowadza iteracyjny proces szyfrowania w celu uzyskania klucza szyfrującego. Proces ten jest powtarzany wielokrotnie, co zwiększa trudność w łamaniu hasła głównego.
+    \item Bcrypt – jest to inny popularny algorytm hashowania, który jest bardzo bezpieczny i trudny do złamania. Bcrypt wykorzystuje funkcję skrótu, która generuje wartość hasha na podstawie hasła użytkownika i soli, która jest dodawana do hasha w celu zwiększenia bezpieczeństwa. Bcrypt jest również iteracyjny i wykorzystuje różne parametry, takie jak koszt, który określa, jak długo ma trwać proces hashowania.
+    \item Scrypt – jest to algorytm hashowania, który został opracowany specjalnie do ochrony haseł przed atakami typu brute force i słownikowymi. Scrypt wykorzystuje funkcję skrótu, która generuje wartość hasha na podstawie hasła użytkownika i soli, a następnie przeprowadza iteracyjny proces szyfrowania w celu uzyskania klucza szyfrującego. Proces ten jest powtarzany wielokrotnie, co utrudnia atakującym łamanie hasła głównego.
+\end{itemize}
