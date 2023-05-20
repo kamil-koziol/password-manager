@@ -11,13 +11,25 @@ Menedżery haseł zapewniają bezpieczne przechowywanie haseł i innych poufnych
   \end{itemize}
 
 \subsection{AES}
+\subsubsection{Historia}
+AES (Advanced Encryption Standard) jest to symetryczny szyfr blokowy oparty na algorytmach Rijndaela, storzonych w 1998 w ramach konkursu gdzie zostały zaprezentowane Instytucji NIST. Na ich podstawie wybranych algorytów powstał AES będący następcą algorytmu DES.
+\subsubsection{Działanie}
+AES działa na stałej długości bloków (128 bitów) i używa tajnego klucza, który może przyjąć długości 128, 192, 256 bitów. Cechuje się wysoką wydajnością zarówno w przypadku sprzętu komputerowego, jak i oprogramowania. AES opiera się na zasadzie znanej jako sieć substytucji-permutacji. W odróżnieniu od swojego poprzednika, czyli algorytmu DES, AES nie korzysta z Sieci Feistela. Algorytm operuje na macierzy bajtów o wymiarach 4×4, nazywaną stanem. Jednak niektóre wersje algorytmu dysponują większym rozmiarem bloku oraz dodatkowymi kolumnami w macierzy.
 
+Rozmiar klucza używany w algorytmie określa liczbę powtórzeń transformacji, które przekształcają dane wejściowe (czyli tekst jawny) w dane wyjściowe (szyfrogram). Liczba cykli powtórzeń jest następująca:
+
+10 cykli powtórzeń dla klucza 128-bitowego.
+12 cykli powtórzeń dla klucza 192-bitowego.
+14 cykli powtórzeń dla klucza 256-bitowego.
+Wszystkie rundy składają się z kilku kroków, z których każdy rozłożony jest na cztery podobne etapy.
+
+Wykonując operacje w odwrotnej kolejności używając tego samego klucza, można przekształcić szyfrogram z powrotem w tekst jawny.
 \subsection{Blowfish}
 
 \subsection{Twofish}
 \subsubsection{Historia}
 Twofish to algorytm szyfru blokowego z kluczem symetrycznym, który został zaprojektowany przez Bruce'a Schneiera, Johna Kelseya, Douga Whitinga, Davida Wagnera, Chrisa Halla i Nielsa Fergusona w 1998 roku. Jest to następca algorytmu szyfrowania Blowfish.
-\subsubsection{Dzialanie}
+\subsubsection{Działanie}
 Twofish działa na blokach danych o stałej długości (128 bitów) i używa tajnego klucza do szyfrowania i deszyfrowania danych. Długość klucza może wynosić od 128 do 256 bitów, co czyni go bardziej bezpiecznym niż Blowfish.
 
 Algorytm Twofish wykorzystuje strukturę sieci Feistela, która jest powszechnie stosowaną strukturą w szyfrach blokowych. Polega on na podzieleniu danych wejściowych na dwa równej wielkości bloki, a następnie zastosowaniu serii rund do bloków przy użyciu harmonogramu klucza.
