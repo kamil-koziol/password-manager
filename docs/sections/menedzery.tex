@@ -12,28 +12,46 @@ Lista wybranych menadzerow, które zostaną przedstawione:
 \end{itemize}
 
 \subsubsection{LastPass}
-
-Jest to jedna z najpopularniejszych aplikacji do przechowywania haseł. LastPass umożliwia przechowywanie haseł, kart kredytowych i innych danych w chmurze, a także generowanie mocnych haseł i automatyczne wypełnianie formularzy.
+Jest to jedna z najpopularniejszych aplikacji do przechowywania haseł. LastPass umożliwia przechowywanie haseł, kart kredytowych i innych danych w chmurze, a także generowanie mocnych haseł i automatyczne wypełnianie formularzy. Do szyfrowania używa standardu AES-256.
 \subsubsection{Wady}
-
+\begin{itemize}
+    \item Brak zwrotów za niezadowolenie,
+    \item Niedokładne tłumaczenie,
+    \item Menedżer przechowuje hasło główne.
+\end{itemize}
 \subsubsection{Zalety}
+\begin{itemize}
+    \item Synchronizacja z chumrą,
+    \item Generator haseł,
+    \item Funkcja Auto-Type, automatycznie wpisuje nazwę użytkownika i hasło w formularzach,
+    \item Dwuskladnikowe uwierzytelnianie.
+\end{itemize}
 
 \subsection{1Password}
-Wieloplatformowy menedżer haseł, którego producentem jest przedsiębiorstwo AgileBits, możliwia przechowywanie haseł, kart kredytowych i innych danych w chmurze. 1Password jest płatynym oprogramowaniem zamkniętym na licencji shareware. Aplikacja korzysta z funkcji haszującej PBKDF2 i szyfruje dane przy użyciu 256-bitowego algorytmu AES. W celu zwiększenia bezpieczeństwa stosowana jest również weryfikacja dwuetapowa.
+Wieloplatformowy menedżer haseł, którego producentem jest przedsiębiorstwo AgileBits, umożliwia przechowywanie haseł, kart kredytowych i innych danych w chmurze. 1Password jest płatynym oprogramowaniem zamkniętym na licencji shareware. Aplikacja korzysta z funkcji haszującej PBKDF2 i szyfruje dane przy użyciu 256-bitowego algorytmu AES. W celu zwiększenia bezpieczeństwa stosowana jest również weryfikacja dwuetapowa.
 \subsubsection{Wady}
 \begin{itemize}
     \item Płatny
 \end{itemize}
 \subsubsection{Zalety}
 \begin{itemize}
-    \item Synchronizacja z chumrą
-    \item Możliwość przechowywania dokumentów, obrazów i innych plików
-    \item W przypadku zgubienia Tajnego klucza nie można wygenerować nowego i konieczne jest utworzenie nowego konta
+    \item Synchronizacja z chumrą,
+    \item Dwuskladnikowe uwierzytelnianie,
+    \item Możliwość przechowywania dokumentów, obrazów i innych plików,
+    \item W przypadku zgubienia Tajnego klucza nie można wygenerować nowego i konieczne jest utworzenie nowego konta.
 \end{itemize}
 
 \subsection{NordPass}
+Jest menedżerem storzonym przez twórców aplikacji NordVPN, umożliwiający przechowywyanie haseł, danych kart kredytowych, dostępnych na wielu urządzeniach, a także generowanie mocnych haseł i automatyczne wypełnianie formularzy. Do szyfrowania wykorzystje algorytmy AES-256 oraz xChaCha20
 \subsubsection{Wady}
+\begin{itemize}
+    \item Darmowa wersja pozwala używać tylko na jednym urządzeniu.
+\end{itemize}
 \subsubsection{Zalety}
+\begin{itemize}
+    \item Synchronizacja z chumrą,
+    \item Dwuskladnikowe uwierzytelnianie.
+\end{itemize}
 
 \subsection{KeePassXC}
 Został stworzony przez KeePassXC Team, jest bezplatnym narzedziem open source, ktore dziala na licencji GLP 2.0 i 3.0. Powstal on jako widelec KeePassX, ktory przestal byc rozwijany.
@@ -41,7 +59,7 @@ Baza danych jest szyfrowana za pomocą algorytmu AES256 lub szyfru blokowego Two
 \subsubsection{Wady}
 \begin{itemize}
     \item Brak wbudowanej synchronizacji z chmura,
-    \item Zlozony interfejs,
+    \item Złozony interfejs,
     \item Brak dedykowanej aplikacji mobilnej.
 \end{itemize}
 
