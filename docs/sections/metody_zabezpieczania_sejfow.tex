@@ -25,6 +25,15 @@ Wszystkie rundy składają się z kilku kroków, z których każdy rozłożony j
 
 Wykonując operacje w odwrotnej kolejności używając tego samego klucza, można przekształcić szyfrogram z powrotem w tekst jawny.
 \subsection{Blowfish}
+\subsubsection{Historia}
+Blowfish to symetryczny algorytm szyfrowania blokowego opracowany przez Bruce'a Schneiera w 1993 roku. Bruce Schneier stworzył Blowfish jako szyfrowanie prywatne, dostępne publicznie i niepodlegające opatentowaniu. Algorytm został opublikowany w celu zapewnienia efektywnego i bezpiecznego szyfrowania.
+
+\subsubsection{Działanie}
+Blowfish działa na blokach danych o długości 64 bitów. Algorytm Blowfish rozpoczyna się od inicjalizacji klucza o długości od 32 do 448 bitów. Klucz jest podzielony na podklucze, które są wykorzystywane w kolejnych rundach szyfrowania. Algorytm generuje zestaw podkluczy inicjalizacyjnych na podstawie głównego klucza. Podklucze są przechowywane w wewnętrznej tablicy i używane do przekształcania danych wejściowych. 
+
+Blowfish składa się z 16 rund szyfrowania. W każdej rundzie dane wejściowe są poddawane serii operacji, które obejmują operacje XOR, zamianę bitów, dodawanie i mieszanie kluczy. Rundy szyfrowania są powtarzane na blokach danych, aż osiągnie się pożądaną ilość iteracji. Każda runda używa podklucza z tablicy podkluczy. 
+
+Po zakończeniu rund szyfrowania, dane wejściowe są zaszyfrowane i zwracane jako tekst szyfrowany. Proces odszyfrowywania w Blowfish jest odwróceniem procesu szyfrowania. Otrzymany tekst szyfrowany jest poddawany przeciwnym operacjom, aż otrzymano oryginalne dane wejściowe.
 
 \subsection{Twofish}
 \subsubsection{Historia}
