@@ -30,6 +30,7 @@ export default function LeftBar({
             <li
               className={selectedCategory === val.name ? styles.selected : ""}
               onClick={() => setSelectedCategory(val.name)}
+              key={val.name}
             >
               <img src={val.icon} alt={val.name} width={24} height={24} />
               <h1>{val.name}</h1>

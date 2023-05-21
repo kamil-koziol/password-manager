@@ -30,6 +30,7 @@ const configuration: webpack.Configuration = {
       },
     ],
   },
+  
 
   output: {
     path: webpackPaths.srcPath,
@@ -47,10 +48,6 @@ const configuration: webpack.Configuration = {
     modules: [webpackPaths.srcPath, 'node_modules'],
     // There is no need to add aliases here, the paths in tsconfig get mirrored
     plugins: [new TsconfigPathsPlugins()],
-    fallback: {
-      path: require.resolve('path-browserify'),
-      constants: require.resolve("constants-browserify")
-    },
   },
 
   plugins: [
@@ -58,6 +55,13 @@ const configuration: webpack.Configuration = {
       NODE_ENV: 'production',
     }),
   ],
+
+  node: {
+    __dirname: true,
+    __filename: true
+  }
+
+    
 };
 
 export default configuration;

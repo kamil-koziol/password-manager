@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 
 import Item from "model/Item";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import styles from "./AllCategoriesPanel.module.scss";
 import categoriesIcon from "../../assets/icons/folder-solid.svg";
@@ -26,14 +26,20 @@ export default function AllCategoriesPanel({
   selectedItemIndex,
   setSelectedItemIndex,
 }: AllCategoriesPanelProps) {
+  const [changingElement, setChangingElement] = useState<Item>({
+    ...items[0],
+  });
+
+  useEffect(() => setChangingElement({ ...items[selectedItemIndex] }), [items]);
+
   function handleOnChange(
     e: React.ChangeEvent<HTMLInputElement>,
     propertyName: string
   ): void {
-    setItems((prevItems) => {
-      const newItems = prevItems.slice();
-      newItems[selectedItemIndex][propertyName] = e.target.value;
-      return newItems;
+    setChangingElement((prev) => {
+      const newItem = { ...prev };
+      newItem[propertyName] = e.target.value;
+      return newItem;
     });
   }
 
@@ -49,7 +55,11 @@ export default function AllCategoriesPanel({
                   styles.item,
                   i === selectedItemIndex ? styles.selected : styles.unselected
                 )}
-                onClick={() => setSelectedItemIndex(i)}
+                onClick={() => {
+                  setSelectedItemIndex(i);
+                  // TODO: Add confirmation
+                  setChangingElement({ ...items[i] });
+                }}
                 key={i}
               >
                 <img src={categoriesIcon} alt="ziut" width={32} height={32} />
@@ -68,7 +78,7 @@ export default function AllCategoriesPanel({
             <span>name</span>
             <input
               type="text"
-              value={items[selectedItemIndex].name}
+              value={changingElement.name}
               onChange={(e) => handleOnChange(e, "name")}
             />
           </li>
@@ -76,7 +86,7 @@ export default function AllCategoriesPanel({
             <span>username</span>
             <input
               type="text"
-              value={items[selectedItemIndex].username}
+              value={changingElement.username}
               onChange={(e) => handleOnChange(e, "username")}
             />
           </li>
@@ -84,7 +94,7 @@ export default function AllCategoriesPanel({
             <span>password</span>
             <input
               type="password"
-              value={items[selectedItemIndex].password}
+              value={changingElement.password}
               onChange={(e) => handleOnChange(e, "password")}
             />
           </li>
@@ -92,7 +102,7 @@ export default function AllCategoriesPanel({
             <span>website</span>
             <input
               type="text"
-              value={items[selectedItemIndex].website}
+              value={changingElement.website}
               onChange={(e) => handleOnChange(e, "website")}
             />
           </li>
@@ -100,9 +110,24 @@ export default function AllCategoriesPanel({
             <span>totp</span>
             <input
               type="text"
-              value={items[selectedItemIndex].totp}
+              value={changingElement.totp}
               onChange={(e) => handleOnChange(e, "totp")}
             />
+          </li>
+          <li className={classNames(styles.default_item, styles.removeButton)}>
+            <span>Remove</span>
+          </li>
+          <li
+            className={classNames(styles.default_item, styles.saveButton)}
+            onClick={() => {
+              setItems((prevItems) => {
+                const newItems = prevItems.slice();
+                newItems[selectedItemIndex] = { ...changingElement };
+                return newItems;
+              });
+            }}
+          >
+            <span>Save</span>
           </li>
         </ul>
       </div>
