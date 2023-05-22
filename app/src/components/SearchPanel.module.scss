@@ -1,3 +1,32 @@
 .main {
     display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.search {
+    flex: 1;
+    display: flex;
+    padding: 1rem;
+    background-color: #272727;
+    border-radius: 0.7rem;
+    gap: 2rem;
+
+    input {
+        all: unset;
+        flex: 1;
+    }
+}
+
+.buttons {
+    ul {
+        list-style-type: none;
+    }
+}
+
+.btn {
+    padding: 0.7rem 2rem;
+    border-radius: 0.5rem;
+    background-color: #323EB1;
+    cursor: pointer;
 }

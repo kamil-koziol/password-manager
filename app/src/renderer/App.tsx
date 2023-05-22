@@ -1,15 +1,101 @@
 /* eslint-disable no-buffer-constructor */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { MemoryRouter as Router, Routes, Route } from "react-router-dom";
+import { MemoryRouter as Router, Routes, Route, Link } from "react-router-dom";
 import LeftBar from "components/LeftBar";
 import Item from "model/Item";
 import { useEffect, useState } from "react";
 import "./App.css";
 import AllCategoriesPanel from "components/AllCategoriesPanel";
 
+import { useNavigate } from "react-router-dom";
 import fs from "fs";
 import path from "path";
 import { encryptData, decryptData } from "lib/crypto_utils";
+import SearchPanel from "components/SearchPanel";
+
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+
+let password = "";
+const savePath = path.dirname(path.dirname(__dirname));
+const dataPath = path.join(savePath, "items.json");
+const saltPath = path.join(savePath, "salt");
+const ivPath = path.join(savePath, "iv");
+
+function readEncryptionElementsFromFiles() {
+  const data = fs.readFileSync(dataPath, "binary");
+  const salt = new Buffer(fs.readFileSync(saltPath, "binary"), "binary");
+  const iv = new Buffer(fs.readFileSync(ivPath, "binary"), "binary");
+
+  return { data, salt, iv };
+}
+
+function EnterPassword() {
+  const [isNewUser, setIsNewUser] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const filePath = path.join(savePath, "items.json");
+    setIsNewUser(!fs.existsSync(filePath));
+  }, []);
+
+  return (
+    <div className="enterPassword">
+      {isNewUser ? (
+        <div className="ep">
+          <h1>Register</h1>
+          <input type="password" name="password" id="password" />
+          <input
+            type="submit"
+            value="Register"
+            onClick={() => {
+              const enPassword = document.getElementById("password")!.value;
+
+              const data = JSON.stringify([], null, 2);
+              const { encryptedData, salt, iv } = encryptData(data, enPassword);
+              fs.writeFileSync(dataPath, encryptedData);
+              fs.writeFileSync(saltPath, salt, null);
+              fs.writeFileSync(ivPath, iv, null);
+              password = enPassword;
+              navigate("/main");
+            }}
+          />
+        </div>
+      ) : (
+        <div className="ep">
+          <ToastContainer />
+          <h1>Hello there</h1>
+          <input type="password" name="password" id="password" />
+          <input
+            type="submit"
+            value="Login"
+            onClick={() => {
+              const enPassword = document.getElementById("password")!.value;
+
+              const { data, salt, iv } = readEncryptionElementsFromFiles();
+              try {
+                const decryptedData = decryptData(data, enPassword, salt, iv);
+                password = enPassword;
+                navigate("/main");
+              } catch (error) {
+                toast.error("Wrong password!", {
+                  position: "top-center",
+                  autoClose: 3000,
+                  hideProgressBar: true,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                });
+              }
+            }}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
 
 function Main() {
   const [selectedCategory, setSelectedCategory] = useState("All categories");
@@ -17,39 +103,23 @@ function Main() {
   const [canWrite, setCanWrite] = useState(false);
   const [selectedItemIndex, setSelectedItemIndex] = useState<number>(0);
   const [search, setSearch] = useState("");
-  const savePath = "/Users/kamilkoziol/ziut";
 
   useEffect(() => {
     // Function to load items from the JSON file
     const loadItemsFromFile = () => {
       const filePath = path.join(savePath, "items.json");
-      fs.readFile(filePath, "utf8", (err, encryptedData) => {
-        if (err) {
-          console.error("Failed to load items from file:", err);
-        } else {
-          try {
-            const salt = new Buffer(
-              fs.readFileSync(path.join(savePath, "salt"), "binary"),
-              "binary"
-            );
-            const iv = new Buffer(
-              fs.readFileSync(path.join(savePath, "iv"), "binary"),
-              "binary"
-            );
-            const data = decryptData(encryptedData, "ziut", salt, iv);
-            const parsedData = JSON.parse(data);
+      if (!fs.existsSync(filePath)) {
+        return;
+      }
 
-            setItems(parsedData);
-            setCanWrite(true);
-            if (parsedData.length > 0) {
-              setSelectedItemIndex(0);
-            }
-            console.log("Items loaded from file successfully!");
-          } catch (error) {
-            console.error("Failed to parse items from file:", error);
-          }
-        }
-      });
+      const { data, salt, iv } = readEncryptionElementsFromFiles();
+      const decryptedData = decryptData(data, password, salt, iv);
+      const parsedData = JSON.parse(decryptedData);
+      setItems(parsedData);
+      setCanWrite(true);
+      if (parsedData.length > 0) {
+        setSelectedItemIndex(0);
+      }
     };
 
     // Call the function to load items from file when the app starts
@@ -59,11 +129,11 @@ function Main() {
   useEffect(() => {
     // Function to write the items to a JSON file
     const writeItemsToFile = () => {
+      const savePath = path.dirname(path.dirname(__dirname));
+      console.log(savePath);
       const filePath = path.join(savePath, "items.json");
       const data = JSON.stringify(items, null, 2);
-      const { encryptedData, salt, iv } = encryptData(data, "ziut");
-      console.log(salt);
-      console.log(iv);
+      const { encryptedData, salt, iv } = encryptData(data, password);
 
       fs.writeFile(filePath, encryptedData, (err) => {
         if (err) {
@@ -85,18 +155,27 @@ function Main() {
 
   return (
     <div className="main">
+      <ToastContainer />
       <LeftBar
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
-      <AllCategoriesPanel
-        showFavouritesOnly={false}
-        search=""
-        items={items}
-        setItems={setItems}
-        selectedItemIndex={selectedItemIndex}
-        setSelectedItemIndex={setSelectedItemIndex}
-      />
+      <div className="mainRight">
+        <SearchPanel
+          search={search}
+          setSearch={setSearch}
+          setItems={setItems}
+          setSelectedItemIndex={setSelectedItemIndex}
+        />
+        <AllCategoriesPanel
+          showFavouritesOnly={selectedCategory === "Favourites"}
+          search={search}
+          items={items}
+          setItems={setItems}
+          selectedItemIndex={selectedItemIndex}
+          setSelectedItemIndex={setSelectedItemIndex}
+        />
+      </div>
     </div>
   );
 }
@@ -105,7 +184,8 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<EnterPassword />} />
+        <Route path="/main" element={<Main />} />
       </Routes>
     </Router>
   );

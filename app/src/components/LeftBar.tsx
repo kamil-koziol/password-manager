@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 
+import { useNavigate } from "react-router-dom";
 import styles from "./LeftBar.module.scss";
 import categoriesIcon from "../../assets/icons/folder-solid.svg";
-import thrashIcon from "../../assets/icons/trash-solid-2.svg";
 import favouritesIcon from "../../assets/icons/star-solid.svg";
-import settingsIcon from "../../assets/icons/gear-solid.svg";
+import logoutIcon from "../../assets/icons/right-from-bracket-solid.svg";
 
 export interface LeftBarProps {
   selectedCategory: string;
@@ -14,14 +14,15 @@ export interface LeftBarProps {
 
 const data = [
   { name: "All categories", icon: categoriesIcon },
-  { name: "Favoutires", icon: favouritesIcon },
-  { name: "Thrash", icon: thrashIcon },
+  { name: "Favourites", icon: favouritesIcon },
 ];
 
 export default function LeftBar({
   selectedCategory,
   setSelectedCategory,
 }: LeftBarProps) {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.main}>
       <ul className={styles.main}>
@@ -38,9 +39,12 @@ export default function LeftBar({
           );
         })}
 
-        <li style={{ marginTop: "auto", paddingBottom: "0.7rem" }}>
-          <img src={settingsIcon} alt="Settings" width={24} height={24} />
-          <h1>Settings</h1>
+        <li
+          style={{ marginTop: "auto", paddingBottom: "0.7rem" }}
+          onClick={() => navigate("/")}
+        >
+          <img src={logoutIcon} alt="Logout" width={24} height={24} />
+          <h1>Logout</h1>
         </li>
       </ul>
     </div>

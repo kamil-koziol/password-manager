@@ -1,7 +1,7 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-function generateRandomPassword(
+export default function generateRandomPassword(
   length: number,
   includeUppercase: boolean = true,
   includeSpecialChars: boolean = true,

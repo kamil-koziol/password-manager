@@ -1,7 +1,7 @@
 .main {
     display: flex;
     gap: 1rem;
-    flex-grow: 1;
+    flex: 1;
 
     .left {
         flex: 1;
@@ -11,6 +11,7 @@
         gap: 2rem;
         background-color: #272727;
         border-radius: 0.7rem;
+        flex-shrink: 0;
 
         ul {
             list-style-type: none;
@@ -21,14 +22,21 @@
             scroll-behavior: smooth;
             gap: 1rem;
             padding-right: 1rem;
+            height: 500px;
 
             .item {
                 display: flex;
                 align-items: center;
-                gap: 2rem;
+                justify-content: space-between;
                 padding: 1rem 1.5rem;
                 border-radius: 1rem;
-                padding-right: 4rem;
+                padding-right: 2rem;
+
+                .item_left {
+                    display: flex;
+                    align-items: center;
+                    gap: 2rem;
+                }
 
                 h1 {
                     font-weight: bold;
@@ -39,6 +47,10 @@
 
                     font-weight: lighter;
                     font-size: 1.2rem;
+                }
+
+                img {
+                    justify-self: flex-end;
                 }
 
             }
@@ -63,6 +75,42 @@
         .default_item {
             display: flex;
             flex-direction: column;
+
+            span {
+                color: #4555E7;
+                font-weight: bold;
+            }
+
+            input {
+                all: unset
+            }
+
+            padding: 1rem 2rem;
+            background-color: #2F2F2F;
+            border-radius: 0.7rem;
+        }
+
+        .password_item {
+
+            .password_left {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .password_right {
+                display: flex;
+                gap: 1rem;
+            }
+
+            display: flex;
+            flex-direction: row;
+
+            justify-content: space-between;
+            align-items: center;
+
+            img {
+                cursor: pointer;
+            }
 
             span {
                 color: #4555E7;

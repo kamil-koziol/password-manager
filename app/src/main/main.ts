@@ -86,8 +86,8 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728,
+    width: 1280,
+    height: 800,
     icon: getAssetPath("icon.png"),
     webPreferences: {
       // preload: app.isPackaged
@@ -95,6 +95,7 @@ const createWindow = async () => {
       //   : path.join(__dirname, "../../.erb/dll/preload.js"),
       nodeIntegration: true,
       contextIsolation: false,
+      devTools: !app.isPackaged,
       // nodeIntegrationInWorker: true,
     },
   });
