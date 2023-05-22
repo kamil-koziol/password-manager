@@ -64,7 +64,7 @@ function EnterPassword() {
       ) : (
         <div className="ep">
           <ToastContainer />
-          <h1>Hello there</h1>
+          <h1>Witam gita</h1>
           <input type="password" name="password" id="password" />
           <input
             type="submit"
