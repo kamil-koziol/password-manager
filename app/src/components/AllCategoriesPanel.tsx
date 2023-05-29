@@ -149,7 +149,7 @@ export default function AllCategoriesPanel({
                             <span className={styles.remaining}>{getRemainingSeconds()}</span>
                             <span>{generateTOTPCode(totp)}</span>
                         </div>
-                        ) : (<></>)}
+                    ) : (<></>)}
                 </div>
                 <ul>
                     <li className={styles.default_item}>
@@ -244,6 +244,17 @@ export default function AllCategoriesPanel({
                                 newItems.splice(selectedItemIndex, 1);
                                 return newItems;
                             });
+
+                            toast.error("Removed " + changingElement.name, {
+                                position: "top-center",
+                                autoClose: 3000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "dark",
+                            });
                         }}
                     >
                         <span>Remove</span>
@@ -255,6 +266,18 @@ export default function AllCategoriesPanel({
                                 const newItems = prevItems.slice();
                                 newItems[selectedItemIndex] = { ...changingElement };
                                 return newItems;
+                            });
+
+
+                            toast.success("Saved " + changingElement.name, {
+                                position: "top-center",
+                                autoClose: 3000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "dark",
                             });
                         }}
                     >
